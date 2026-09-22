@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sadia ❤️ Sazzadur</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    font-family:"Noto Sans Bengali","Segoe UI",sans-serif;
+    background:linear-gradient(135deg,#ff758c,#ff7eb3,#ffc1cc);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+/* ভাসমান হৃদয় */
+
+.heart{
+    position:fixed;
+    bottom:-40px;
+    animation:float 7s linear infinite;
+    opacity:.7;
+    z-index:0;
+}
+
+@keyframes float{
+    0%{
+        transform:translateY(0) rotate(0);
+        opacity:0;
+    }
+    20%{
+        opacity:1;
+    }
+    100%{
+        transform:translateY(-110vh) rotate(360deg);
+        opacity:0;
+    }
+}
+
+/* মূল বাক্স */
+
+.box{
+    width:92%;
+    max-width:430px;
+    max-height:90vh;
+    overflow-y:auto;
+    background:rgba(255,255,255,.96);
+    border-radius:30px;
+    padding:28px 23px;
+    text-align:center;
+    box-shadow:0 15px 50px rgba(0,0,0,.25);
+    position:relative;
+    z-index:2;
+    animation:show .7s ease;
+}
+
+@keyframes show{
+    from{
+        transform:scale(.8);
+        opacity:0;
+    }
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+h1{
+    color:#ff3366;
+    font-size:29px;
+    margin:10px 0 18px;
+}
+
+p{
+    font-size:17px;
+    line-height:1.9;
+}
+
+.ছোট{
+    color:#999;
+    font-size:14px;
+}
+
+/* গোল ছবি */
+
+.photo{
+    width:160px;
+    height:160px;
+    object-fit:cover;
+    border-radius:50%;
+    border:6px solid #ffb3c6;
+    box-shadow:0 8px 25px rgba(255,51,102,.3);
+}
+
+/* বাটন */
+
+.buttons{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    margin-top:25px;
+}
+
+button{
+    border:none;
+    border-radius:30px;
+    padding:14px 20px;
+    font-size:16px;
+    font-family:inherit;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.next{
+    background:#ff3366;
+    color:white;
+}
+
+.second{
+    background:#ffe3ea;
+    color:#ff3366;
+}
+
+button:hover{
+    transform:scale(1.04);
+}
+
+/* গান বাটন */
+
+.music{
+    position:fixed;
+    top:15px;
+    right:15px;
+    z-index:10;
+    background:white;
+    color:#ff3366;
+    box-shadow:0 4px 15px rgba(0,0,0,.15);
+    padding:10px 16px;
+}
+
+/* শেষের হৃদয় */
+
+.big-heart{
+    font-size:75px;
+    animation:beat 1s infinite;
+}
+
+@keyframes beat{
+    0%,100%{
+        transform:scale(1);
+    }
+    50%{
+        transform:scale(1.2);
+    }
+}
+
+.love{
+    color:#ff3366;
+    font-size:22px;
+    font-weight:bold;
+}
+
+/* আনন্দের কণা */
+
+.confetti{
+    position:fixed;
+    top:-30px;
+    z-index:20;
+    animation:fall 4s linear forwards;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh) rotate(720deg);
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- গান প্লেয়ার -->
+
+<button class="music" onclick="গান()" id="গানবাটন">
+🎵 গান চালু করুন
+</button>
+
+<audio id="গান" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+
+<!-- মূল অংশ (প্রথম পৃষ্ঠা) -->
+
+<div class="box" id="box">
+
+    <!-- প্রথম পৃষ্ঠায় গোল ছবি -->
+    <img src="sadia.jpg" class="photo" alt="Sadia" onerror="this.onerror=null; this.src='sadia.png';">
+
+    <h1>হ্যালো Sadia! 💌</h1>
+
+    <p>
+        তোমার জন্য ছোট্ট একটা গল্প আছে...
+        গল্পটা খুব সাধারণভাবে শুরু হবে,
+        কিন্তু শেষটা হয়তো তোমার মুখে হাসি এনে দেবে। ❤️
+    </p>
+
+    <p class="ছোট">
+        শুরু করার আগে একটা প্রশ্ন...
+    </p>
+
+    <div class="buttons">
+
+        <button class="next" onclick="পরেরপাতা()">
+            গল্পটা শুনতে চাই ❤️
+        </button>
+
+        <button class="second" onclick="পরেরপাতা()">
+            দেখি কী আছে এখানে 👀
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* গল্প */
+
+const গল্প = [
+
+{
+    শিরোনাম:"একটা সাধারণ শুরু 🌱",
+
+    কথা:`
+    সব সুন্দর গল্পের শুরুটা কিন্তু অসাধারণ হয় না।
+
+    আমাদের গল্পটাও খুব সাধারণভাবেই শুরু হয়েছিল।
+
+    কিছু কথা...
+    কিছু হাসি...
+    কিছু ছোট ছোট কথোপকথন...
+
+    তখনও বুঝিনি,
+    এই সাধারণ কথাগুলোই একদিন
+    আমার কাছে এতটা বিশেষ হয়ে যাবে। ❤️
+    `,
+
+    প্রথম:"তারপর কী হলো? ❤️",
+    দ্বিতীয়:"আরও শুনতে চাই 🥺"
+},
+
+{
+    শিরোনাম:"কথা বলতে বলতে... 💬",
+
+    কথা:`
+    প্রথমদিকে তোমার সাথে কথা বলাটা ছিল
+    অন্য সবার মতোই সাধারণ।
+
+    কিন্তু ধীরে ধীরে একটা অদ্ভুত ব্যাপার হলো...
+
+    তোমার মেসেজের অপেক্ষা করতে শুরু করলাম।
+
+    তোমার সাথে কথা না হলে
+    দিনটা যেন একটু অসম্পূর্ণ লাগে।
+
+    আর তোমার সাথে কথা হলে,
+    কোনো কারণ ছাড়াই মুখে হাসি চলে আসে। ❤️
+    `,
+
+    প্রথম:"এটা কীভাবে হলো? 🥺",
+    দ্বিতীয়:"আমিও কিন্তু একটু অবাক! 🙈"
+},
+
+{
+    শিরোনাম:"কখন যে তুমি বিশেষ হয়ে গেলে... 🌸",
+
+    কথা:`
+    সত্যি বলতে,
+    ঠিক কোন মুহূর্তে তুমি আমার কাছে
+    এতটা গুরুত্বপূর্ণ হয়ে গেলে,
+    সেটা আমি নিজেও জানি না।
+
+    হয়তো তোমার কথার মাঝে...
+
+    হয়তো তোমার হাসির মাঝে...
+
+    অথবা হয়তো তোমার সেই ছোট ছোট
+    অভ্যাসগুলোর মাঝে...
+
+    শুধু জানি,
+    একসময় এসে বুঝলাম—
+
+    তোমার সাথে কথা বলা
+    আর শুধু কথা বলা নেই। ❤️
+    `,
+
+    প্রথম:"কেন এমন হলো? 💕",
+    দ্বিতীয়:"তারপর কী বুঝলে?"
+},
+
+{
+    শিরোনাম:"একটা সত্যি কথা 🥺",
+
+    কথা:`
+    অনেক ভেবেছি কথাটা বলব কি না।
+
+    কারণ মনের কথা বলা সহজ নয়।
+
+    কখনো কখনো ভয় হয়,
+    সত্যিটা বললে যদি সম্পর্কটাই বদলে যায়?
+
+    তারপরও মনে হলো,
+    কিছু অনুভূতি চুপ করে রাখলে
+    হয়তো সারাজীবন আফসোস থেকে যাবে।
+
+    তাই আজ বলেই ফেলি...
+
+    Sadia,
+    তোমাকে আমার সত্যিই অনেক ভালো লাগে। ❤️
+    `,
+
+    প্রথম:"তারপর? ❤️",
+    দ্বিতীয়:"আমি লজ্জা পাচ্ছি 🙈"
+},
+
+{
+    শিরোনাম:"শুধু ভালো লাগা নয়... 💖",
+
+    কথা:`
+    তোমাকে ভালো লাগার কারণ
+    শুধু তোমার হাসি নয়।
+
+    তোমার সাথে কথা বললে
+    নিজেকে একটু বেশি স্বাভাবিক মনে হয়।
+
+    তোমার কাছে নিজের কথা বলতে ভালো লাগে।
+
+    তোমার হাসি দেখতে ভালো লাগে।
+
+    তোমার মন খারাপ হলে
+    সেটা ভালো করে দিতে ইচ্ছে করে।
+
+    আর সবচেয়ে বেশি...
+
+    তোমাকে আমার জীবনের
+    সুন্দর একটা অংশ হিসেবে দেখতে ইচ্ছে করে। ❤️
+    `,
+
+    প্রথম:"তুমি সত্যিই সিরিয়াস? 👀",
+    দ্বিতীয়:"আর কী বলতে চাও?"
+},
+
+{
+    শিরোনাম:"হ্যাঁ, আমি সত্যিই সিরিয়াস। ❤️",
+
+    কথা:`
+    আমি তোমাকে বড় বড় প্রতিশ্রুতি দিতে চাই না।
+
+    শুধু এটুকু বলতে চাই—
+
+    তোমাকে সম্মান করব।
+
+    তোমার কথা মন দিয়ে শুনব।
+
+    তোমার ভালো সময়ে হাসব,
+    আর খারাপ সময়ে পাশে থাকার চেষ্টা করব।
+
+    সবকিছু হয়তো সবসময় নিখুঁত হবে না।
+
+    কিন্তু যদি তুমি পাশে থাকো,
+    তাহলে প্রতিটি কঠিন সময়ও
+    একটু সহজ মনে হবে। ❤️
+    `,
+
+    প্রথম:"শেষ কথাটা বলো... 🥺",
+    দ্বিতীয়:"এত সুন্দর কথা কেন বলছ? ❤️"
+},
+
+{
+    শিরোনাম:"তাহলে আজ একটা প্রশ্ন করি... 💌",
+
+    কথা:`
+    এতক্ষণ আমি শুধু আমার গল্পটা বললাম।
+
+    এবার গল্পের সবচেয়ে গুরুত্বপূর্ণ
+    অংশটা তোমার হাতে।
+
+    আমি জানি না তোমার उत्तर কী হবে।
+
+    তবুও আজ সাহস করে জিজ্ঞেস করছি...
+
+    Sadia,
+
+    তুমি কি আমার জীবনের
+    এই গল্পটার পরের অধ্যায় হতে চাও?
+
+    তুমি কি আমার
+    ভালোবাসার মানুষ হবে? ❤️
+    `,
+
+    শেষ:true
+}
+
+];
+
+let পাতা=0;
+
+
+/* পরের পাতা */
+
+function পরেরপাতা(){
+
+    পাতা++;
+
+    if(পাতা>=গল্প.length){
+        শেষপাতা();
+        return;
+    }
+
+    let item=গল্প[পাতা];
+
+    if(item.শেষ){
+        শেষপাতা();
+        return;
+    }
+
+    document.getElementById("box").innerHTML=`
+
+        <div style="font-size:45px;">💖</div>
+
+        <h1>${item.শিরোনাম}</h1>
+
+        <p>${item.কথা}</p>
+
+        <div class="buttons">
+
+            <button class="next" onclick="পরেরপাতা()">
+                ${item.প্রথম}
+            </button>
+
+            <button class="second" onclick="পরেরপাতা()">
+                ${item.দ্বিতীয়}
+            </button>
+
+        </div>
+    `;
+
+    animation();
+}
+
+
+/* শেষ প্রশ্ন */
+
+function শেষপাতা(){
+
+    document.getElementById("box").innerHTML=`
+
+        <div class="big-heart">❤️</div>
+
+        <h1>Sadia...</h1>
+
+        <p class="love">
+            তুমি কি আমার ভালোবাসার মানুষ হবে?
+        </p>
+
+        <p>
+            কোনো চাপ নেই।
+
+            <br>
+
+            শুধু মনের কথাটা
+            তোমার সামনে রাখলাম।
+
+            <br><br>
+
+            এবার উত্তরটা তোমার। ❤️
+        </p>
+
+        <div class="buttons">
+
+            <button class="next"
+                    onclick="হ্যাঁ()">
+                হ্যাঁ ❤️
+            </button>
+
+            <button class="second"
+                    id="না"
+                    onclick="না()">
+                না 😒
+            </button>
+
+        </div>
+    `;
+
+    animation();
+}
+
+
+/* হ্যাঁ */
+
+function হ্যাঁ(){
+
+    আনন্দ();
+
+    document.getElementById("box").innerHTML=`
+
+        <div class="big-heart">💖</div>
+
+        <h1>সাদিয়া হ্যাঁ বলেছে! 😍</h1>
+
+        <p class="love">
+            Sadia ❤️ Sazzadur
+        </p>
+
+        <p>
+
+            তাহলে আজ থেকে
+            আমাদের গল্পে একটা নতুন অধ্যায় শুরু হলো। 🌸
+
+            <br><br>
+
+            জানো Sadia?
+
+            <br>
+
+            ভবিষ্যতে কী হবে জানি না।
+
+            <br>
+
+            কিন্তু আজকের এই মুহূর্তটা
+            আমি অনেকদিন মনে রাখব।
+
+            <br><br>
+
+            তুমি আমার জীবনের গল্পে
+            এসে এটাকে আরও সুন্দর করে দিয়েছ। ❤️
+
+            <br><br>
+
+            <b>
+            এই গল্পটা যেন এখানেই শেষ না হয়...
+            বরং এখান থেকেই শুরু হয়। 💕
+            </b>
+
+        </p>
+
+        <div style="font-size:38px;">
+            💕 🌸 💖 🌸 💕
+        </div>
+    `;
+}
+
+
+/* না */
+
+let না_চাপ=0;
+
+function না(){
+
+    না_চাপ++;
+
+    let button=document.getElementById("না");
+
+    let কথা=[
+
+        "একবার ভেবে দেখো না? 🥺",
+
+        "সত্যিই না? 😭",
+
+        "আরেকবার চিন্তা করো... ❤️",
+
+        "এত সহজে না বলে দিও না! 🙈",
+
+        "আমার এত কষ্টের গল্পটা শুনে? 😭",
+
+        "শেষবার জিজ্ঞেস করছি... 🥺❤️"
+
+    ];
+
+    button.innerText=
+        কথা[Math.min(না_চাপ-1,কথা.length-1)];
+
+    button.style.transform=
+        `translate(${Math.random()*120-60}px,
+        ${Math.random()*70-35}px)`;
+}
+
+
+/* গান নিয়ন্ত্রণ */
+
+let গানচলছে=false;
+
+function গান(){
+
+    let music=document.getElementById("গান");
+
+    if(!গানচলছে){
+
+        music.play();
+
+        গানচলছে=true;
+
+        document.getElementById("গানবাটন")
+        .innerText="🔇 গান বন্ধ করুন";
+
+    }else{
+
+        music.pause();
+
+        গানচলছে=false;
+
+        document.getElementById("গানবাটন")
+        .innerText="🎵 গান চালু করুন";
+    }
+}
+
+
+/* অ্যানিমেশন */
+
+function animation(){
+
+    let box=document.getElementById("box");
+
+    box.style.animation="none";
+
+    setTimeout(()=>{
+
+        box.style.animation="show .7s ease";
+
+    },10);
+}
+
+
+/* ভাসমান হৃদয় */
+
+function হৃদয়(){
+
+    let h=document.createElement("div");
+
+    h.className="heart";
+
+    let তালিকা=[
+        "❤️","💕","💖","💗","💓","🌸"
+    ];
+
+    h.innerText=
+        তালিকা[Math.floor(Math.random()*তালিকা.length)];
+
+    h.style.left=
+        Math.random()*100+"vw";
+
+    h.style.fontSize=
+        (15+Math.random()*25)+"px";
+
+    h.style.animationDuration=
+        (5+Math.random()*5)+"s";
+
+    document.body.appendChild(h);
+
+    setTimeout(()=>{
+        h.remove();
+    },10000);
+}
+
+setInterval(হৃদয়,500);
+
+
+/* আনন্দ কণা */
+
+function আনন্দ(){
+
+    let তালিকা=[
+        "❤️","💖","💕","🌸","✨","🎉","🥰"
+    ];
+
+    for(let i=0;i<70;i++){
+
+        let c=document.createElement("div");
+
+        c.className="confetti";
+
+        c.innerText=
+            তালিকা[Math.floor(Math.random()*তালিকা.length)];
+
+        c.style.left=
+            Math.random()*100+"vw";
+
+        c.style.animationDuration=
+            (2+Math.random()*3)+"s";
+
+        c.style.fontSize=
+            (15+Math.random()*25)+"px";
+
+        document.body.appendChild(c);
+
+        setTimeout(()=>{
+            c.remove();
+        },5000);
+    }
+}
+
+</script>
+
+</body>
+</html>
